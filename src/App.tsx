@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import styled from "styled-components";
+import LoadingBox from "./Components/LoadingBox";
+import MainBox from "./Components/MainBox";
 
-function App() {
+const MainContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+`;
+const Title = styled.h1`
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 15px;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContainer>
+      <Suspense fallback={<LoadingBox />}>
+        <Title>UNIT6 연락처</Title>
+        <MainBox />
+      </Suspense>
+    </MainContainer>
   );
-}
+};
 
 export default App;
