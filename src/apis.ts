@@ -1,6 +1,6 @@
 import { EditContact } from "./types";
 
-const url = "http://localhost:3000/contacts";
+const url = "https://contact-server-taeheon.herokuapp.com/contacts";
 
 export const getAll = async () => {
   const response = await fetch(url);
