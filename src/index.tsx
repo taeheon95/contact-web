@@ -22,11 +22,10 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle>
-      <RecoilRoot>
-        <App />
-      </RecoilRoot>
-    </GlobalStyle>
+    <GlobalStyle />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );
