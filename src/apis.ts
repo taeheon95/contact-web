@@ -1,6 +1,6 @@
 import { EditContact } from "./types";
 
-const url = "https://contact-server-taeheon.herokuapp.com/contacts";
+const url = "http://localhost:3000/contacts";
 
 export const getAll = async () => {
   const response = await fetch(url);
@@ -10,6 +10,20 @@ export const getAll = async () => {
 export const remove = async (id: number) => {
   const result = await fetch(`${url}/${id}`, {
     method: "DELETE",
+  });
+  return result;
+};
+
+export const update = async (editContact: EditContact) => {
+  const result = await fetch(`${url}/${editContact.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      ...editContact,
+      age: Number(editContact.age),
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   return result;
 };

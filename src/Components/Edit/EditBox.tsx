@@ -1,8 +1,10 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { create } from "../../apis";
+import { create, update } from "../../apis";
 import { contactsState, editedContactState } from "../../store";
 import EditItem from "./EditItem";
+import { Contact } from "../../types";
+import { types } from "util";
 
 const Box = styled.div`
   display: flex;
@@ -61,6 +63,32 @@ const EditBox = ({ setIsEdit }: { setIsEdit: (isEdit: boolean) => void }) => {
   const handleCancel = () => {
     setEditedContact({});
     setIsEdit(false);
+  };
+
+  const handleUpdate = async () => {
+    const response = await update(editedContact);
+    if (response.ok) {
+      setContacts([
+        ...contacts.map((contact) => {
+          if (contact.id === editedContact.id) {
+            contact.name = editedContact.name
+              ? editedContact.name
+              : contact.name;
+            contact.age = editedContact.age ? editedContact.age : contact.age;
+            contact.description = editedContact.description
+              ? editedContact.description
+              : contact.description;
+            contact.email = editedContact.email
+              ? editedContact.email
+              : contact.email;
+            contact.phoneNumber = editedContact.phoneNumber
+              ? editedContact.phoneNumber
+              : contact.phoneNumber;
+          }
+          return contact;
+        }),
+      ]);
+    }
   };
 
   return (
